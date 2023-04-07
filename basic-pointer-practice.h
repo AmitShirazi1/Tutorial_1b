@@ -1,0 +1,4 @@
+#ifndef BASIC_POINTER_PRACTICE_H
+#define BASIC_POINTER_PRACTICE_H
+
+#endif
