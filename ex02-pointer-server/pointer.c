@@ -27,25 +27,26 @@ int main(int argc, char* argv[]){
 
 	//step 1: pointer observation
 	puts("=========step 1===========");
-	printf("cmok: %p\n", cmok);
-	printf("s1: %p\n", s1);
-	printf("*s1: %p\n", *s1);
+	printf("cmok gpt1 (its address): %p\n", (void *)&cmok);
+	printf("cmok gpt2 (its lu value): %lu\n", *(unsigned long *)&cmok);
+	printf("s1: %p\n", (void *)s1);
+	printf("*s1 (needs to be changed in accordance to cmok): %p\n", *s1);
 	printf("cmok's name : %s\n", cmok.id);
 	printf("cmok's latency: %d \n", cmok.latency);
-	printf("cmok's nthreads - first try: %d\n", cmok.nthreads);
+	printf("cmok's nthreads - first try: %p\n", (void *)cmok.nthreads);
 	printf("cmok's nthreads - second try: %d\n", *cmok.nthreads);
-	printf("cmok's nthreads through pointer - first try: %d\n", s1->nthreads);
+	printf("cmok's nthreads through pointer - first try: %p\n", (void *)s1->nthreads);
 	printf("cmok's nthreads through pointer - second try: %d\n", *s1->nthreads);
 	puts("=========================");
 	puts("");
-//
-//	//step 2: print idserver
-//	puts("========step 2==========");
-//	puts("--results of print_idserver--");
-//	print_idserver(cmok);
-//	puts("==========================");
-//	puts("");
-//
+
+	//step 2: print idserver
+	puts("========step 2==========");
+	puts("--results of print_idserver--");
+	print_idserver(cmok);
+	puts("==========================");
+	puts("");
+
 //
 //	//step 3: modification
 //	puts("========step 3==========");

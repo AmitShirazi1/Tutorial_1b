@@ -16,8 +16,8 @@ LINK_TARGET = pointer
 OBJS = \
 	pointer.o \
 	idserver.o
-	
 # Here is a Make Macro defined by two Macro Expansions.
+
 # A Macro Expansion may be treated as a textual replacement of the Make Macro.
 # Macro Expansions are introduced with $ and enclosed in (parentheses).
 
@@ -45,17 +45,22 @@ all : $(LINK_TARGET)
 
 clean: 
 	rm -f $(REBUILDABLES)
+# Another trick is 'rm *.o', which would delete all object files. 
 
 # There is no required order to the list of rules as they appear in the Makefile.
-# Make will build its own dependency tree and only execute each rule only once
-# its dependencies' rules have been executed successfully.
+# Make will build its own dependency tree and only execute each rule
+# only once its dependencies' rules have been executed successfully.
 
 # Here is a Rule that uses some built-in Make Macros in its command:
 # $@ expands to the rule's target, in this case "wgetX".
 # $^ expands to the rule's dependencies, in this case the two files
 # url.o and wgetX.o
+
 $(LINK_TARGET) : $(OBJS)
 	cc -g -o $@ $^ 
+# In other words, this means:
+# 	pointer: pointer.o idserver.o
+# 		cc -g -o pointer pointer.o idserver.o
 
 # Here is a Pattern Rule, often used for compile-line.
 # It says how to create a file with a .o suffix, given a file with a .c suffix.
@@ -65,8 +70,8 @@ $(LINK_TARGET) : $(OBJS)
 
 %.o : %.c
 	cc -g  -Wall -o $@ -c $<
-  
-# These are Dependency Rules, which are rules without any command.
+
+# Below are Dependency Rules, which are rules without any command.
 # Dependency Rules indicate that if any file to the right of the colon changes,
 # the target to the left of the colon should be considered out-of-date.
 # The commands for making an out-of-date target up-to-date may be found elsewhere

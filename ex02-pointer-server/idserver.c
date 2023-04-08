@@ -17,6 +17,7 @@
  */
 void print_idserver(idserver s)
 {
+	
 }
 
 /**
