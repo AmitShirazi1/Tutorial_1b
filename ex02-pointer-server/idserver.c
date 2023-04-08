@@ -30,10 +30,13 @@ void print_idserver(idserver s)
 void modify(idserver s, char *id, int latency, char status[])
 {
 	printf("Entering modify");
+	s.id = (char *) malloc(strlen(id)+1);
 	strcpy(s.id, id);
 	s.latency = latency;
+	*s.status = (char *) malloc(strlen(status)+1);
 	strcpy(s.status, status);
 	printf("Modify's fine");
+	free(s.id);	free(*s.status);
 }
 
 /**
