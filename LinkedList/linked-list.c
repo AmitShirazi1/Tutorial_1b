@@ -18,29 +18,28 @@ void insert(DLlist *list, Student *student, int side) {
         newNode->right = NULL;
         list->right = newNode;
     }
-
-    free(newNode);
 }
 
 
 void remove(DLlist *list, Student *student) {
-    LNode *tempNode = search(list, student);
+    LNode *removed = search(list, student);
 
-    if (tempNode->left == NULL && tempNode->right == NULL) {
+    if (removed->left == NULL && removed->right == NULL) {
         list->left = NULL;
         list->right = NULL;
-        return;
     }
-    if (tempNode->left == NULL) {
+    else if (removed->left == NULL) {
         remove(list, LEFT);
     }
-    if (tempNode->right == NULL) {
+    else if (removed->right == NULL) {
         remove(list, RIGHT);
     }
-    tempNode->left->right = tempNode->right;
-    tempNode->right->left = tempNode->left;
-
-    free(tempNode);
+    else {
+        removed->left->right = removed->right;
+        removed->right->left = removed->left;
+    }
+    
+    free(removed);
 }
 
 
@@ -57,8 +56,7 @@ void removeHead(DLlist *list, int side) {
 
 
 LNode * search(DLlist *list, Student *student) {
-    LNode *tempNode = (LNode *) malloc(sizeof(LNode));
-    tempNode = list->left;
+    LNode *tempNode = list->left;
 
     while (tempNode->student != student) {
         tempNode = tempNode->right;
