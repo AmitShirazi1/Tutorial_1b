@@ -16,4 +16,7 @@ typedef struct DoubleLinkedList {
     LNode right;
 } DLlist;
 
+#define LEFT 0
+#define RIGHT 1
+
 #endif
