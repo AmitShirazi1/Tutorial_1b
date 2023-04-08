@@ -50,12 +50,18 @@ int main(int argc, char* argv[]){
 
 	//step 3: modification
 	puts("========step 3==========");
+	printf("what");
 	modify(cmok, "cmok", 13000, "unknown");
+	/* The 'modify' function will not modify the true cmok,
+		It would modify a copy of cmok that will be created inside the function. */
 
 	puts("--results of modify--");
 	print_idserver(cmok);
 
 	modify_by_pointer(&cmok,"cmok", 13000, "unknown");
+	/* The 'modify_by_pointer' function will indeed modify cmok,
+		Because were giving her a pointer to it. */
+
 	puts("--results of modify_by_pointer--");
 	print_idserver(cmok);
 	puts("=======================");
