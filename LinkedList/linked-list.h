@@ -8,7 +8,8 @@ typedef struct Student {
 
 typedef struct Node {
     Student *student;
-    LNode *next;
+    LNode *left;
+    LNode *right;
 } LNode;
 
 typedef struct DoubleLinkedList {
@@ -20,5 +21,10 @@ typedef struct DoubleLinkedList {
 #define RIGHT 1
 
 void insert(DLlist *list, Student *student, int side);
+
+void remove(DLlist *list, Student *student);
+void removeHead(DLlist *list, int side);
+
+LNode * search(DLlist *list, Student *student);
 
 #endif
