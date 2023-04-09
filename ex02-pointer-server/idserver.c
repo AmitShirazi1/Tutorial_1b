@@ -17,11 +17,11 @@
  */
 void print_idserver(idserver s)
 {
-	printf("Id: %s\n", s.id);
-	printf("Latency (usec): %d\n", s.latency);
-	printf("Region: %s\n", s.region);
-	printf("Status: %s\n", s.status);
-	printf("Nbr of threads: %d\n", *s.nthreads);
+    printf("Id: %s\n", s.id);
+    printf("Latency (usec): %d\n", s.latency);
+    printf("Region: %s\n", s.region);
+    printf("Status: %s\n", s.status);
+    printf("Nbr of threads: %d\n", *s.nthreads);
 }
 
 /**
@@ -29,14 +29,13 @@ void print_idserver(idserver s)
  */
 void modify(idserver s, char *id, int latency, char status[])
 {
-	printf("Entering modify");
-	s.id = (char *) malloc(strlen(id)+1);
-	strcpy(s.id, id);
-	s.latency = latency;
-	*s.status = (char *) malloc(strlen(status)+1);
-	strcpy(s.status, status);
-	printf("Modify's fine");
-	free(s.id);	free(*s.status);
+    printf("Entering modify");
+    s.id = (char *) malloc(strlen(id)+1);
+    strcpy(s.id, id);
+    s.latency = latency;
+    strcpy(s.status, status);
+    printf("Modify's fine");
+    free(s.id);
 }
 
 /**
@@ -44,24 +43,25 @@ void modify(idserver s, char *id, int latency, char status[])
  */
 void modify_by_pointer(idserver *s, char *id, int latency, char status[])
 {
-	strcpy(s->id, id);
-	s->latency = latency;
-	strcpy(s->status, status);
-	printf("Modify_by_pointer's fine");
+    s->id = (char *) malloc(strlen(id)+1);
+    strcpy(s->id, id);
+    s->latency = latency;
+    strcpy(s->status, status);
+    printf("Modify_by_pointer's fine");
 }
 
 idserver* create_idserver(char *id, char *region, int latency,
-		char *status, int *nthreads)
+                          char *status, int *nthreads)
 {
 
-	idserver s;
-	s.id = id;
-	s.region = region;
-	s.latency = latency;
-	strncpy(s.status, status, strlen(status)+1);
-	s.nthreads = nthreads;
-	puts("---print inside create_idserver function---");
-	print_idserver(s);
-	puts("---end of print inside");
-	return &s;
+    idserver s;
+    s.id = id;
+    s.region = region;
+    s.latency = latency;
+    strncpy(s.status, status, strlen(status)+1);
+    s.nthreads = nthreads;
+    puts("---print inside create_idserver function---");
+    print_idserver(s);
+    puts("---end of print inside");
+    return &s;
 }

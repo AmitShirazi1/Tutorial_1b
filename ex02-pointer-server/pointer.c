@@ -14,58 +14,58 @@
 
 int main(int argc, char* argv[]){
 
-	idserver cmok, albi;
-	idserver *s1, *s2;
+    idserver cmok, albi;
+    idserver *s1, *s2;
 
-	cmok.latency = 600;
-	cmok.region = "eur";
-	cmok.id = "cmok";
-	strncpy(cmok.status, "up", strlen("up") + 1);
-	int p = 70;
-	cmok.nthreads = &p;
-	s1 = &cmok;
+    cmok.latency = 600;
+    cmok.region = "eur";
+    cmok.id = "cmok";
+    strncpy(cmok.status, "up", strlen("up") + 1);
+    int p = 70;
+    cmok.nthreads = &p;
+    s1 = &cmok;
 
-	//step 1: pointer observation
-	puts("=========step 1===========");
-	printf("cmok gpt1 (its address): %p\n", (void *)&cmok);
-	printf("cmok gpt2 (its lu value): %lu\n", *(unsigned long *)&cmok);
-	printf("s1: %p\n", (void *)s1);
-	printf("*s1 (needs to be changed in accordance to cmok): %p\n", *s1);
-	printf("cmok's name : %s\n", cmok.id);
-	printf("cmok's latency: %d \n", cmok.latency);
-	printf("cmok's nthreads - first try: %p\n", (void *)cmok.nthreads);
-	printf("cmok's nthreads - second try: %d\n", *cmok.nthreads);
-	printf("cmok's nthreads through pointer - first try: %p\n", (void *)s1->nthreads);
-	printf("cmok's nthreads through pointer - second try: %d\n", *s1->nthreads);
-	puts("=========================");
-	puts("");
+    //step 1: pointer observation
+    puts("=========step 1===========");
+    printf("cmok gpt1 (its address): %p\n", (void *)&cmok);
+    printf("cmok gpt2 (its lu value): %lu\n", *(unsigned long *)&cmok);
+    printf("s1: %p\n", (void *)s1);
+    printf("*s1 (needs to be changed in accordance to cmok): %p\n", *s1);
+    printf("cmok's name : %s\n", cmok.id);
+    printf("cmok's latency: %d \n", cmok.latency);
+    printf("cmok's nthreads - first try: %p\n", (void *)cmok.nthreads);
+    printf("cmok's nthreads - second try: %d\n", *cmok.nthreads);
+    printf("cmok's nthreads through pointer - first try: %p\n", (void *)s1->nthreads);
+    printf("cmok's nthreads through pointer - second try: %d\n", *s1->nthreads);
+    puts("=========================");
+    puts("");
 
-	//step 2: print idserver
-	puts("========step 2==========");
-	puts("--results of print_idserver--");
-	print_idserver(cmok);
-	puts("==========================");
-	puts("");
+    //step 2: print idserver
+    puts("========step 2==========");
+    puts("--results of print_idserver--");
+    print_idserver(cmok);
+    puts("==========================");
+    puts("");
 
 
-	//step 3: modification
-	puts("========step 3==========");
-	printf("what");
-	modify(cmok, "cmok", 13000, "unknown");
-	/* The 'modify' function will not modify the true cmok,
-		It would modify a copy of cmok that will be created inside the function. */
+    //step 3: modification
+    puts("========step 3==========");
+    printf("what");
+    modify(cmok, "cmok", 13000, "unknown");
+    /* The 'modify' function will not modify the true cmok,
+        It would modify a copy of cmok that will be created inside the function. */
 
-	puts("--results of modify--");
-	print_idserver(cmok);
+    puts("--results of modify--");
+    print_idserver(cmok);
 
-	modify_by_pointer(&cmok,"cmok", 13000, "unknown");
-	/* The 'modify_by_pointer' function will indeed modify cmok,
-		Because were giving her a pointer to it. */
+    modify_by_pointer(&cmok,"cmok", 13000, "unknown");
+    /* The 'modify_by_pointer' function will indeed modify cmok,
+        Because were giving her a pointer to it. */
 
-	puts("--results of modify_by_pointer--");
-	print_idserver(cmok);
-	puts("=======================");
-	puts("");
+    puts("--results of modify_by_pointer--");
+    print_idserver(cmok);
+    puts("=======================");
+    puts("");
 
 //	//step 4: pointers
 //	puts("========step 4========");
@@ -94,7 +94,7 @@ int main(int argc, char* argv[]){
 //	puts("");
 
 
-	return EXIT_SUCCESS;
+    return EXIT_SUCCESS;
 }
 
 
