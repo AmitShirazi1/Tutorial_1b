@@ -50,7 +50,6 @@ int main(int argc, char* argv[]){
 
     //step 3: modification
     puts("========step 3==========");
-    printf("what");
     modify(cmok, "cmok", 13000, "unknown");
     /* The 'modify' function will not modify the true cmok,
         It would modify a copy of cmok that will be created inside the function. */
