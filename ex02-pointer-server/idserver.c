@@ -29,12 +29,10 @@ void print_idserver(idserver s)
  */
 void modify(idserver s, char *id, int latency, char status[])
 {
-    printf("Entering modify");
     s.id = (char *) malloc(strlen(id)+1);
     strcpy(s.id, id);
     s.latency = latency;
     strcpy(s.status, status);
-    printf("Modify's fine");
     free(s.id);
 }
 
@@ -47,7 +45,6 @@ void modify_by_pointer(idserver *s, char *id, int latency, char status[])
     strcpy(s->id, id);
     s->latency = latency;
     strcpy(s->status, status);
-    printf("Modify_by_pointer's fine");
 }
 
 idserver* create_idserver(char *id, char *region, int latency,
