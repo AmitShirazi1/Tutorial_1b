@@ -18,8 +18,10 @@ int main(int argc, char* argv[]){
     idserver *s1, *s2;
 
     cmok.latency = 600;
-    cmok.region = "eur";
-    cmok.id = "cmok";
+    cmok.region = (char *) malloc(strlen("eur")+1);
+    strcpy(cmok.region, "eur");
+    cmok.id = (char *) malloc(strlen("cmok")+1);
+    strcpy(cmok.id, "cmok");
     strncpy(cmok.status, "up", strlen("up") + 1);
     int p = 70;
     cmok.nthreads = &p;
@@ -31,7 +33,7 @@ int main(int argc, char* argv[]){
     printf("cmok gpt2 (its lu value): %lu\n", *(unsigned long *)&cmok);
     printf("s1: %p\n", (void *)s1);
     printf("*s1 (needs to be changed in accordance to cmok): %p\n", *s1); //Ask about this
-    printf("cmok's name : %s\n", cmok.id);
+    printf("cmok's name: %s\n", cmok.id);
     printf("cmok's latency: %d \n", cmok.latency);
     printf("cmok's nthreads - first try: %p\n", (void *)cmok.nthreads);
     printf("cmok's nthreads - second try: %d\n", *cmok.nthreads);
@@ -52,14 +54,15 @@ int main(int argc, char* argv[]){
     puts("========step 3==========");
     modify(cmok, "cmok", 13000, "unknown");
     /* The 'modify' function will not modify the true cmok,
-        It would modify a copy of cmok that will be created inside the function. */
+       It would modify a copy of cmok that will be created inside the function.
+       So basically it's worth nothing. */
 
     puts("--results of modify--");
     print_idserver(cmok);
 
     modify_by_pointer(&cmok,"cmok", 13000, "unknown");
     /* The 'modify_by_pointer' function will indeed modify cmok,
-        Because were giving her a pointer to it. */
+       Because it's been given a pointer. */
 
     puts("--results of modify_by_pointer--");
     print_idserver(cmok);
@@ -81,13 +84,16 @@ int main(int argc, char* argv[]){
 	puts("=====================");
 	puts(""); //What do they mean by 'explain the output'?
 
+    free(cmok.id); free(cmok.region);
+    free(albi.id); free(albi.region);
+
 
 	//step 5: create idservers
 	puts("========step 5=======");
 	int nthreads = 20;
 
 	idserver *s3 = create_idserver("thorn", "afr", 5200, "up", &nthreads);
-	puts("--results of creating ted, printed outside--");
+	puts("--results of creating thorn, printed outside--");
 	print_idserver(*s3);
 	puts("=====================");
 	puts("");

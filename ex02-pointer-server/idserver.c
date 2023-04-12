@@ -29,10 +29,13 @@ void print_idserver(idserver s)
  */
 void modify(idserver s, char *id, int latency, char status[])
 {
-    s.id = (char *) malloc(strlen(id)+1); //Why did it need a malloc here and not in status?
+    s.id = (char *) malloc(strlen(id)+1);
+    /* Why did it need a malloc here and not in status?
+       Possible answer - because status's size is defined as 8 in the struct,
+       Unlike id, which does not have size defined in advance? */
     strcpy(s.id, id);
     s.latency = latency;
-    strcpy(s.status, status);
+    strncpy(s.status, status, strlen(status)+1);
     free(s.id);
 }
 
@@ -41,10 +44,11 @@ void modify(idserver s, char *id, int latency, char status[])
  */
 void modify_by_pointer(idserver *s, char *id, int latency, char status[])
 {
+    free(s->id);
     s->id = (char *) malloc(strlen(id)+1);
     strcpy(s->id, id);
     s->latency = latency;
-    strcpy(s->status, status);
+    strncpy(s->status, status, strlen(status)+1);
 }
 
 idserver* create_idserver(char *id, char *region, int latency,
@@ -52,8 +56,10 @@ idserver* create_idserver(char *id, char *region, int latency,
 {
 
     idserver s;
-    s.id = id;
-    s.region = region;
+    s.id = (char *) malloc(strlen(id)+1);
+    strcpy(s.id, id);
+    s.region = (char *) malloc(strlen(region)+1);
+    strcpy(s.region, region);
     s.latency = latency;
     strncpy(s.status, status, strlen(status)+1);
     s.nthreads = nthreads;
