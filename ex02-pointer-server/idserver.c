@@ -29,7 +29,7 @@ void print_idserver(idserver s)
  */
 void modify(idserver s, char *id, int latency, char status[])
 {
-    s.id = (char *) malloc(strlen(id)+1);
+    s.id = (char *) malloc(strlen(id)+1); //Why did it need a malloc here and not in status?
     strcpy(s.id, id);
     s.latency = latency;
     strcpy(s.status, status);

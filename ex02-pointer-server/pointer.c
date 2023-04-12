@@ -30,7 +30,7 @@ int main(int argc, char* argv[]){
     printf("cmok gpt1 (its address): %p\n", (void *)&cmok);
     printf("cmok gpt2 (its lu value): %lu\n", *(unsigned long *)&cmok);
     printf("s1: %p\n", (void *)s1);
-    printf("*s1 (needs to be changed in accordance to cmok): %p\n", *s1);
+    printf("*s1 (needs to be changed in accordance to cmok): %p\n", *s1); //Ask about this
     printf("cmok's name : %s\n", cmok.id);
     printf("cmok's latency: %d \n", cmok.latency);
     printf("cmok's nthreads - first try: %p\n", (void *)cmok.nthreads);
@@ -66,31 +66,31 @@ int main(int argc, char* argv[]){
     puts("=======================");
     puts("");
 
-//	//step 4: pointers
-//	puts("========step 4========");
-//	albi = cmok;
-//	s2 = &albi;
-//
-//	modify_by_pointer(s2, "albi", 9000, "down");
-//	puts("--*s2--");
-//	print_idserver(*s2);
-//	puts("--albi--");
-//	print_idserver(albi);
-//	puts("--cmok--");
-//	print_idserver(cmok);
-//	puts("=====================");
-//	puts("");
-//
-//
-//	//step 5: create idservers
-//	puts("========step 5=======");
-//	int nthreads = 20;
-//
-//	idserver *s3 = create_idserver("thorn", "afr", 5200, "up", &nthreads);
-//	puts("--results of creating ted, printed outside--");
-//	print_idserver(*s3);
-//	puts("=====================");
-//	puts("");
+	//step 4: pointers
+	puts("========step 4========");
+	albi = cmok; //Albi is now a copy of cmok
+	s2 = &albi;
+
+	modify_by_pointer(s2, "albi", 9000, "down");
+	puts("--*s2--");
+	print_idserver(*s2); //Albi idserver
+	puts("--albi--");
+	print_idserver(albi); //Albi idserver
+	puts("--cmok--");
+	print_idserver(cmok); //Cmok idserver
+	puts("=====================");
+	puts(""); //What do they mean by 'explain the output'?
+
+
+	//step 5: create idservers
+	puts("========step 5=======");
+	int nthreads = 20;
+
+	idserver *s3 = create_idserver("thorn", "afr", 5200, "up", &nthreads);
+	puts("--results of creating ted, printed outside--");
+	print_idserver(*s3);
+	puts("=====================");
+	puts("");
 
 
     return EXIT_SUCCESS;
