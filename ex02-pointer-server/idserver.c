@@ -18,8 +18,8 @@
 void print_idserver(idserver s)
 {
     printf("Id: %s\n", s.id);
-    printf("Latency (usec): %d\n", s.latency);
     printf("Region: %s\n", s.region);
+    printf("Latency (usec): %d\n", s.latency);
     printf("Status: %s\n", s.status);
     printf("Nbr of threads: %d\n", *s.nthreads);
 }
@@ -51,7 +51,7 @@ void modify_by_pointer(idserver *s, char *id, int latency, char status[])
     strncpy(s->status, status, strlen(status)+1);
 }
 
-idserver* create_idserver(char *id, char *region, int latency,
+idserver create_idserver(char *id, char *region, int latency,
                           char *status, int *nthreads)
 {
 
@@ -66,5 +66,5 @@ idserver* create_idserver(char *id, char *region, int latency,
     puts("---print inside create_idserver function---");
     print_idserver(s);
     puts("---end of print inside");
-    return &s;
+    return s;
 }

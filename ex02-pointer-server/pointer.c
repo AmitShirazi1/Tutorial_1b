@@ -71,32 +71,42 @@ int main(int argc, char* argv[]){
 
 	//step 4: pointers
 	puts("========step 4========");
-	albi = cmok; //Albi is now a copy of cmok
+	albi = cmok;
+    /* Albi is now a special boy:
+       It points to the same id, region, and nthreads as cmok -
+       Which means changes made to those variables in one idserver will affect the other.
+       However, it is a copy of cmok w.r.t the latency and status variables -
+       Which means changes made to them in one idserver will not affect the other. */
 	s2 = &albi;
 
 	modify_by_pointer(s2, "albi", 9000, "down");
+    /* Changes Albi's id, latency, and status + Changes Cmok's id */
 	puts("--*s2--");
 	print_idserver(*s2); //Albi idserver
 	puts("--albi--");
 	print_idserver(albi); //Albi idserver
 	puts("--cmok--");
-	print_idserver(cmok); //Cmok idserver
+	print_idserver(cmok); //Cmok idserver (now its id is strangely albi)
 	puts("=====================");
 	puts(""); //What do they mean by 'explain the output'?
 
-    free(cmok.id); free(cmok.region);
-    free(albi.id); free(albi.region);
+    free(cmok.id); free(cmok.region); //Frees albi's id and region as well.
 
 
 	//step 5: create idservers
 	puts("========step 5=======");
 	int nthreads = 20;
 
-	idserver *s3 = create_idserver("thorn", "afr", 5200, "up", &nthreads);
+	idserver s3 = create_idserver("thorn", "afr", 5200, "up", &nthreads);
+    /* Creates s3 that has pointers to the same id, region, and nthreads as the s that was created inside the function,
+       However, it is a copy of that s w.r.t the latency and status variables. */
 	puts("--results of creating thorn, printed outside--");
-	print_idserver(*s3);
+	print_idserver(s3);
 	puts("=====================");
 	puts("");
+
+    free(s3.id); free(s3.region);
+    /* Frees the id and region that was originally allocated for the idserver s that was created inside the function create_idserver. */
 
 
     return EXIT_SUCCESS;
